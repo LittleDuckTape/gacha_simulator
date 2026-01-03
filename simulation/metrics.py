@@ -6,7 +6,6 @@ def summarize(data):
         'median': np.median(data),
         'std': np.std(data),
         'p90': np.percentile(data, 90),
-        'p95': np.percentile(data, 95)
     }
 
 def cdf(data):

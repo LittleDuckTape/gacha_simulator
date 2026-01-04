@@ -53,7 +53,7 @@ if system != st.session_state.last_system:
 
 
 #tabs
-tab1, tab2 = st.tabs(["🎰 Pull Demo", "📊 Simulation Stats"])
+tab1, tab2, tab3 = st.tabs(["🎰 Pull Demo", "📊 Simulation Stats", "📜 History"])
 
 #tab 1: pull demo
 with tab1:
@@ -136,3 +136,30 @@ with tab2:
             Steeper curves indicate lower variance and fairer outcomes.
             """
         )
+
+#tab 3: history
+with tab3:
+    st.subheader("User Pull History & Stats")
+    history = st.session_state.get("history", [])
+    total_pulls = len(history)
+    five_star_count = history.count("LIMITED") + history.count("STANDARD")
+    five_star_percent = (five_star_count / total_pulls * 100) if total_pulls > 0 else 0
+
+
+    if five_star_count > 0:
+        win_5050 = history.count("LIMITED")
+        win_rate_5050 = win_5050 / five_star_count * 100
+    else:
+        win_5050 = 0
+        win_rate_5050 = 0
+
+    st.metric("Total Pulls", total_pulls)
+    st.metric("5★ Pulled", five_star_count)
+    st.metric("5★ Rate (%)", f"{five_star_percent:.2f}")
+    st.metric("50/50 Win Rate (%)", f"{win_rate_5050:.2f}")
+
+    st.markdown("### Full Pull History")
+    if history:
+        st.write(history)
+    else:
+        st.write("No pulls yet.")

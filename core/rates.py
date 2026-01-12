@@ -17,7 +17,7 @@ def five_star_rate(pity):
 
 # here to explain stuff:
 # base rate is 0.6%
-# from 75 to 89 pulls, the rate increases linearly to 100%
+# from 75 to 89 pulls, the rate increases exponentially to 100%
 # at 90th pull, it is guaranteed to be a 5-star
 
 def four_star_rate(four_star_pity):
